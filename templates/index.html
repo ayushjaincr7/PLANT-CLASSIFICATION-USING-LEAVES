@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+A Robust AI model for plant classification using leave
+{% endblock %}
+
+
+{% block content %}
+<div class="container py-5">
+    <header class="text-white text-center">
+        <h1 class="display-4"> A Robust AI model for plant classification using leaves</h1>
+    </header>
+</div>
+<div class="row py-4">
+    <div class="col-lg-6 mx-auto">
+        <!-- Upload image input  -->
+        <form action="{{ url_for('predict_image_file')}}" enctype="multipart/form-data" method="POST">
+            <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                <input class="form-control border-0" type="file" id="upload" name="file">
+                <label class="font-weight-light text-muted" for="upload" id="upload-label">Choose file</label>
+                <div class="input-group-append">
+                    <label class="btn btn-light m-0 rounded-pill px-4" for="upload">
+                        <i class="fa fa-cloud-upload mr-2 text-muted"></i><small
+                        class="text-uppercase font-weight-bold text-muted">
+                            Choose file
+                        </small>
+                    </label>
+                </div>
+            </div>
+            <!-- Upload image area -->
+            <p class="font-italic text-white text-center">The image uploaded will be rendered inside the box below.</p>
+            <div class="image-area mt-4"><img src="#" class="img-fluid rounded shadow-sm mx-auto d-block" alt="" name="imageResult" id="imageResult"></div>
+            
+            <!-- Submit Button -->
+            <div class="container">
+                <div class="row">
+                    <div class="col text-center">
+                        <input type="submit" class="btn btn-primary my-3"/>
+                    </div>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+{% endblock %}

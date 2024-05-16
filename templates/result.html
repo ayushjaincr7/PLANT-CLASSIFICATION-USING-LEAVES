@@ -1,0 +1,81 @@
+{% extends "layout.html"%}
+{% block title %}
+Prediction - A Robust AI model for plant classification using leaves
+{% endblock %}
+{% block content %}
+<div class="container py-5">
+
+    <header class="text-white text-center">
+        <h1 class="display-4 font-weight-bold" >A Robust AI model for plant classification using leaves</h1>
+    </header>
+    <div class="row">
+        <div class="col-md-6">
+            <canvas id="accuracyChart" width="400" height="400"></canvas>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+            <script>
+                // Get the canvas element
+                var ctx = document.getElementById('accuracyChart').getContext('2d');
+
+                // Define data for the pie chart
+                var data = {
+                    labels: ['Correct', 'Incorrect'],
+                    datasets: [{
+                        data: [{{ probability }}, {{ 100 - probability }}],
+                    backgroundColor: ['#132a13', 'red'],
+    }]
+};
+
+                // Create the pie chart
+                var myPieChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: data,
+                    options: {
+                        responsive: false, // Disable responsiveness to control size
+                        maintainAspectRatio: false, // Disable aspect ratio
+                        plugins: {
+                            datalabels: {
+                                display: false // Hide data labels for smaller charts
+                            }
+                        },
+                        legend: {
+                            labels: {
+                                fontColor: 'red' // Change legend label color here
+                            }
+                        }
+                    }
+                });
+
+
+            </script>
+        </div>
+        <div class="col-md-6">
+            <header class="text-white text-center">
+                <h1 class="display-5 text-dark font-weight-bold">Prediction:</h1>
+                {% if class_name %}
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2 class="display-4 text-white font-weight-bold">
+                            {{ class_name }}
+                        </h2>
+                    </div>
+                    <div>
+                        <p>
+                        <h2 class="text-dark font-weight-bold">Description:</h2>
+                        Scientific Name: {{ des['scientific name']}}</br>
+                        Family: {{ des.Family }}</br>
+                        Average Height: {{ des['Average Height'] }}</br>
+                        Type: {{ des.Type }}</br>
+                        <br>
+                        {{ des.description }}</p>
+                    </div>
+                </div>
+                {% else %}
+                <h2 class="display-4 text-dark font-weight-bold">{{ err }}</h2>
+                {% endif %}
+            </header>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
