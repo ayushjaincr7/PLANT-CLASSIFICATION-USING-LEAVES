@@ -4,7 +4,7 @@ import numpy as np
 from PIL import Image
 from tensorflow.keras.applications.resnet50 import preprocess_input
 
-model = load_model('model.h5')
+model = load_model('trained_model/model.h5')
 
 def preprocessing_img(img_path):
     op_img = Image.open(img_path)
